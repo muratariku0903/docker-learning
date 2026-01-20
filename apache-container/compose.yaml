@@ -1,0 +1,6 @@
+services:
+  web:
+    image: httpd
+    container_name: apache01
+    ports:
+      - "8080:80"
