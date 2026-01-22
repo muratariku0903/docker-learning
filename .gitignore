@@ -1,1 +1,3 @@
 /wordpress_mariadb/html
+/tmp
+**/node_modules

@@ -1,0 +1,36 @@
+services:
+  # abr-geocoder 2.2.1（現行版）
+  abr-geocoder-v2:
+    build:
+      context: .
+      dockerfile: Dockerfile.v2
+    container_name: abr-geocoder-v2
+    ports:
+      - "3000:3000"
+    volumes:
+      - abr-data-v2:/data/abr-geocoder
+      - ./io:/app/io
+    environment:
+      - ABR_GEOCODER_DIR=/data/abr-geocoder
+      - PORT=3000
+
+  # abr-geocoder 1.3.0（旧版）
+  abr-geocoder-v1:
+    build:
+      context: .
+      dockerfile: Dockerfile.v1
+    container_name: abr-geocoder-v1
+    ports:
+      - "3001:3000"
+    volumes:
+      - abr-data-v1:/data/abr-geocoder
+      - ./io:/app/io
+    environment:
+      - ABR_GEOCODER_DIR=/data/abr-geocoder
+      - PORT=3000
+
+volumes:
+  abr-data-v2:
+    name: abr-geocoder-data-v2
+  abr-data-v1:
+    name: abr-geocoder-data-v1
