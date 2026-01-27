@@ -1,0 +1,36 @@
+services:
+  # Node.js 24.13.0
+  node-axios-test:
+    build: .
+    container_name: node24-axios-test
+    volumes:
+      - ./src:/app/src
+      - /app/node_modules
+      - /app/dist
+    tty: true
+    stdin_open: true
+
+  # Node.js 24.11.0
+  node24-11:
+    build:
+      context: .
+      dockerfile: Dockerfile.node24.11
+    container_name: node24-11-axios-test
+    volumes:
+      - ./src:/app/src
+      - /app/node_modules
+      - /app/dist
+    tty: true
+    stdin_open: true
+
+  # Lambda Runtime Emulator (Node.js 24)
+  lambda:
+    build:
+      context: .
+      dockerfile: Dockerfile.lambda
+    container_name: node24-lambda-test
+    ports:
+      - "9000:8080"
+    environment:
+      - NODE_OPTIONS=--trace-deprecation
+    tty: true

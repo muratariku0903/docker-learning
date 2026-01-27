@@ -1,0 +1,19 @@
+# Lambda Runtime Interface Emulator を使用した環境
+FROM public.ecr.aws/lambda/nodejs:24
+
+WORKDIR ${LAMBDA_TASK_ROOT}
+
+# package.json と tsconfig.json をコピー
+COPY package.json tsconfig.json ./
+
+# 依存関係をインストール
+RUN npm install
+
+# ソースコードをコピー
+COPY src/ ./src/
+
+# TypeScript をビルド
+RUN npm run build
+
+# Lambda ハンドラーを指定
+CMD ["dist/handler.handler"]
