@@ -1,0 +1,9 @@
+services:
+  web:
+    image: maven:3.9-eclipse-temurin-21
+    command: mvn spring-boot:run
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./demo:/demo
+    working_dir: /demo
